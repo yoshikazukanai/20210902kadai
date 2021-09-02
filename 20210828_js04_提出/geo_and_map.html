@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>位置情報取得&map表示</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: calc(100% - 102px);
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>位置情報取得&Map表示</h1>
+  <div id="map"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src='https://www.bing.com/api/maps/mapcontrol?key=AifEjrIu_gIcZngE1MqWxgXUNZgcuEwNmkmUlR1K2s-NAJL5GhqkFQjR885S-1He' async defer></script>
+  <script>
+
+<script src='sample.js'></script>
+
+
+
+
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Directions Input Panel</title>
+<style>body{padding:0;margin:0;background:#333;}h1{padding:0;margin:0;font-size:50%;color:white;}div{float: left;}</style>
+<style>
+html, body{
+    padding:0;
+    margin:0;
+    height:100%;
+}
+.directionsContainer{
+    position:relative;
+    width:28%;
+    height:95%;
+    overflow-y:auto;
+    float:left;
+    background:white;
+    padding-left:15px;
+}
+#myMap{
+    position:relative;
+    width:calc(100% - 380px);
+    height:95%;
+    float:left;
+    width:70%;
+}
+</style>
+</head>
+<body>
+<h1>Directions Input Panel</h1>
+<!-- MAP[START] -->
+
+<div class="directionsContainer">
+
+
+  
+    <div id="directionsPanel"></div>
+    <div id="directionsItinerary"></div>
+</div>
+<div id="myMap"></div>
+<!-- MAP[END] -->
+
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AifEjrIu_gIcZngE1MqWxgXUNZgcuEwNmkmUlR1K2s-NAJL5GhqkFQjR885S-1He' async defer></script>
+<script>
+let map,directionsManager;
+function GetMap() {
+    map = new Microsoft.Maps.Map('#myMap', {
+        center: new Microsoft.Maps.Location(47.6149, -122.1941),
+        zoom: 15,
+        mapTypeId: Microsoft.Maps.MapTypeId.aerial
+    });
+    //Load the directions module.
+    Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+        //Create an instance of the directions manager.
+        directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+
+        //Specify where to display the route instructions.
+        directionsManager.setRenderOptions({itineraryContainer: '#directionsItinerary'});
+
+        //Specify the where to display the input panel
+        directionsManager.showInputPanel('directionsPanel');
+    });
+}
+</script>
+</body>
+</html>
